@@ -30,9 +30,12 @@ bot.command('start', async (ctx) => {
 })
 
 bot.command('shorts', async (ctx) => {
-  const url = ctx.message.text
+  await ctx.reply('Введите ссылку на YouTube Shorts')
+  bot.on('message:text', async (ctx) => {
+    const url = ctx.message.text
 
-  await downloadShorts(ctx, url)
+    await downloadShorts(ctx, url)
+  })
 })
 
 bot.command('help', async (ctx) => {
