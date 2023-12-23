@@ -1,0 +1,28 @@
+{
+  "name": "telegram-bot",
+  "version": "0.0.1",
+  "description": "Download YouTube shorts in Telegram!",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "dev": "nodemon ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "main": "main.ts"
+  },
+  "author": {
+    "name": "Sergey",
+    "email": "sergey.zrch@gmail.com"
+  },
+  "dependencies": {
+    "@grammyjs/conversations": "^1.1.2",
+    "@grammyjs/parse-mode": "^1.6.0",
+    "@grammyjs/runner": "^2.0.3",
+    "dotenv": "^16.0.3",
+    "grammy": "^1.15.3",
+    "identify-youtube-shorts": "^1.0.2",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.9",
+    "ts-node": "^10.9.1"
+  }
+}
