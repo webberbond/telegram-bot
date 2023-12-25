@@ -4,5 +4,6 @@ interface Commands {
 }
 
 export const COMMANDS: Commands[] = [
-  { command: '/shorts', description: 'Download a YouTube shorts' },
+  { command: '/shorts', description: 'Download YouTube Shorts Video' },
+  { command: '/reels', description: 'Download Instagram Reels Video' },
 ]

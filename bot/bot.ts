@@ -1,10 +1,11 @@
-import { Bot, GrammyError, HttpError, InputFile, session } from 'grammy'
+import { Bot, session } from 'grammy'
 import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
 import type { ParseModeFlavor } from '@grammyjs/parse-mode'
 import { BotContext } from './types'
 import { COMMANDS } from './commands'
 import * as dotenv from 'dotenv'
 import { downloadShorts } from './helpers/shorts.helper'
+import { downloadReels } from './helpers/reels.helper'
 
 dotenv.config()
 
@@ -35,6 +36,15 @@ bot.command('shorts', async (ctx) => {
     const url = ctx.message.text
 
     await downloadShorts(ctx, url)
+  })
+})
+
+bot.command('reels', async (ctx) => {
+  await ctx.reply('Введите ссылку на Instagram Reels')
+  bot.on('message:text', async (ctx) => {
+    const url = ctx.message.text
+
+    await downloadReels(ctx, url)
   })
 })
 

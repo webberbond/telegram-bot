@@ -40,12 +40,13 @@ export async function downloadShorts(ctx: BotContext, url: string) {
           height: 1920,
           width: 1080,
           supports_streaming: true,
-          reply_to_message_id: ctx.message.message_id,
         })
       } else {
         await ctx.reply(
           '*Размер файла очень большой.*\n_Файл не может быть скачан из-за лимитов Telegram_.',
-          { reply_to_message_id: ctx.message.message_id }
+          {
+            reply_to_message_id: ctx.message.message_id,
+          }
         )
       }
     } else {
