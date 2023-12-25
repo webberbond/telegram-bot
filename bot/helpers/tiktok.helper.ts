@@ -2,20 +2,23 @@ import axios from 'axios'
 import { BotContext } from 'bot/types'
 import { InputFile } from 'grammy'
 
-export async function downloadReels(ctx: BotContext, instaUrl: string) {
+export async function downloadTikTok(ctx: BotContext, tiktokUrl: string) {
   try {
     const options = {
       method: 'GET',
-      url: 'https://instagram-media-downloader.p.rapidapi.com/rapid/post.php',
-      params: { url: instaUrl },
+      url: 'https://tiktok-download-video1.p.rapidapi.com/getVideo',
+      params: {
+        url: tiktokUrl,
+        hd: '1',
+      },
       headers: {
-        'X-RapidAPI-Key': '25415b622emshc4c6c96d8990326p111fb7jsn0ea4a69a9112',
-        'X-RapidAPI-Host': 'instagram-media-downloader.p.rapidapi.com',
+        'X-RapidAPI-Key': 'a4dfd05044mshfdb8a6dce0927d1p1ef9cajsnbbb8803ce90a',
+        'X-RapidAPI-Host': 'tiktok-download-video1.p.rapidapi.com',
       },
     }
     const response = await axios.request(options)
-    console.log(response.data)
-    const videoUrl = response.data.video
+
+    const videoUrl = response.data.data.play
 
     const videoResponse = await axios.get(videoUrl, {
       responseType: 'arraybuffer',

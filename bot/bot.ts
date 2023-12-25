@@ -6,6 +6,7 @@ import { COMMANDS } from './commands'
 import * as dotenv from 'dotenv'
 import { downloadShorts } from './helpers/shorts.helper'
 import { downloadReels } from './helpers/reels.helper'
+import { downloadTikTok } from './helpers/tiktok.helper'
 
 dotenv.config()
 
@@ -27,7 +28,9 @@ bot.use(
 )
 
 bot.command('start', async (ctx) => {
-  await ctx.conversation.enter('startConversation')
+  await ctx.reply(
+    'Привет! Я бот для скачивания видео с YouTube Shorts, Instagram Reels и TikTok.'
+  )
 })
 
 bot.command('shorts', async (ctx) => {
@@ -45,6 +48,15 @@ bot.command('reels', async (ctx) => {
     const url = ctx.message.text
 
     await downloadReels(ctx, url)
+  })
+})
+
+bot.command('tiktok', async (ctx) => {
+  await ctx.reply('Введите ссылку на TikTok Видео')
+  bot.on('message:text', async (ctx) => {
+    const url = ctx.message.text
+
+    await downloadTikTok(ctx, url)
   })
 })
 
