@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Download YouTube shorts in Telegram!",
   "scripts": {
-    "start": "npx ts-node index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "dev": "nodemon ./index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "main": "main.ts"
