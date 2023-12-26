@@ -1,10 +1,10 @@
-import { BotContext } from 'bot/types'
+import { MyContext } from 'bot/types'
 import { InputFile } from 'grammy'
 
 const ytdl = require('ytdl-core')
 const checkIfYoutubeShorts = require('identify-youtube-shorts')
 
-export async function downloadShorts(ctx: BotContext, url: string) {
+export async function downloadShortsHelper(ctx: MyContext, url: string) {
   const urlRegex = /(https?:\/\/[^\s]+)/
   const match = urlRegex.exec(url)
   if (!match) {

@@ -12,3 +12,5 @@ interface SessionData {
 export type SessionContext = Context & SessionFlavor<SessionData>
 export type BotContext = SessionContext & ConversationFlavor
 export type ConverstaionContext = Conversation<BotContext>
+export type MyContext = Context & ConversationFlavor
+export type MyConversation = Conversation<MyContext>

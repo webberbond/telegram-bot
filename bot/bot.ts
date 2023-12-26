@@ -1,21 +1,20 @@
 import { Bot, session } from 'grammy'
 import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
-import type { ParseModeFlavor } from '@grammyjs/parse-mode'
-import { BotContext } from './types'
+import { MyContext } from './types'
 import { COMMANDS } from './commands'
+import { conversations, createConversation } from '@grammyjs/conversations'
+import { downloadShorts } from './functions/shorts.functions'
+import { downloadReels } from './functions/reels.function'
+import { downloadTikTok } from './functions/tiktok.function'
 import * as dotenv from 'dotenv'
-import { downloadShorts } from './helpers/shorts.helper'
-import { downloadReels } from './helpers/reels.helper'
-import { downloadTikTok } from './helpers/tiktok.helper'
 
 dotenv.config()
 
 const BOT_TOKEN = process.env.BOT_TOKEN || ''
 
-const bot = new Bot<ParseModeFlavor<BotContext>>(BOT_TOKEN)
+const bot = new Bot<MyContext>(BOT_TOKEN)
 
 bot.use(hydrateReply)
-
 bot.api.setMyCommands(COMMANDS)
 bot.api.config.use(parseMode('Markdown'))
 
@@ -27,6 +26,11 @@ bot.use(
   })
 )
 
+bot.use(conversations())
+bot.use(createConversation(downloadShorts))
+bot.use(createConversation(downloadReels))
+bot.use(createConversation(downloadTikTok))
+
 bot.command('start', async (ctx) => {
   await ctx.reply(
     'Привет! Я бот для скачивания видео с YouTube Shorts, Instagram Reels и TikTok.'
@@ -34,30 +38,15 @@ bot.command('start', async (ctx) => {
 })
 
 bot.command('shorts', async (ctx) => {
-  await ctx.reply('Введите ссылку на YouTube Shorts')
-  bot.on('message:text', async (ctx) => {
-    const url = ctx.message.text
-
-    await downloadShorts(ctx, url)
-  })
+  await ctx.conversation.enter('downloadShorts')
 })
 
 bot.command('reels', async (ctx) => {
-  await ctx.reply('Введите ссылку на Instagram Reels')
-  bot.on('message:text', async (ctx) => {
-    const url = ctx.message.text
-
-    await downloadReels(ctx, url)
-  })
+  await ctx.conversation.enter('downloadReels')
 })
 
 bot.command('tiktok', async (ctx) => {
-  await ctx.reply('Введите ссылку на TikTok Видео')
-  bot.on('message:text', async (ctx) => {
-    const url = ctx.message.text
-
-    await downloadTikTok(ctx, url)
-  })
+  await ctx.conversation.enter('downloadTikTok')
 })
 
 bot.command('help', async (ctx) => {
@@ -69,7 +58,6 @@ bot.command('help', async (ctx) => {
 })
 
 bot.command('cancel', async (ctx) => {
-  await ctx.conversation.exit()
   await ctx.reply('Leaving...')
 })
 

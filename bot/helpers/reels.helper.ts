@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { BotContext } from 'bot/types'
+import { MyContext } from 'bot/types'
 import { InputFile } from 'grammy'
 
-export async function downloadReels(ctx: BotContext, instaUrl: string) {
+export async function downloadReelsHelper(ctx: MyContext, instaUrl: string) {
   try {
     const options = {
       method: 'GET',

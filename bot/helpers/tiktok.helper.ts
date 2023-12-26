@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { BotContext } from 'bot/types'
+import { MyContext } from 'bot/types'
 import { InputFile } from 'grammy'
 
-export async function downloadTikTok(ctx: BotContext, tiktokUrl: string) {
+export async function downloadTikTokHelper(ctx: MyContext, tiktokUrl: string) {
   try {
     const options = {
       method: 'GET',
