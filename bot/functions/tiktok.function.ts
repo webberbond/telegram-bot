@@ -1,5 +1,5 @@
 import { MyContext, MyConversation } from 'bot/types'
-import { downloadTikTokHelper } from 'bot/helpers/tiktok.helper'
+import { downloadTikTokHelper } from '../helpers/tiktok.helper'
 
 export async function downloadTikTok(
   conversation: MyConversation,

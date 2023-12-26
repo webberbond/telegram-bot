@@ -1,5 +1,5 @@
 import { MyContext, MyConversation } from 'bot/types'
-import { downloadReelsHelper } from 'bot/helpers/reels.helper'
+import { downloadReelsHelper } from '../helpers/reels.helper'
 
 export async function downloadReels(
   conversation: MyConversation,
