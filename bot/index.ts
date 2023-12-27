@@ -1,6 +1,6 @@
 import { webhookCallback } from 'grammy'
 import { bot } from './bot'
-import express from 'express'
+const express = require('express')
 
 const runBot = () => {
   if (process.env.NODE_ENV === 'production') {
